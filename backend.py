@@ -15,8 +15,8 @@ def home():
 
 @app.route('/update_table', methods=['GET'])
 def update_table():
-    param1 = request.args.get('🎛️')
-    sd.putString('🎛️', param1)
+    param1 = request.args.get('cumber')
+    sd.putString('cumber', param1)
     return render_template('index.html', dataToRender=param1)
 
 if __name__ == '__main__':
