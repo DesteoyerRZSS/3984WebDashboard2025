@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>FIRST Robotics Dashboard</h1>
+    <p>Battery Voltage: <span id="battery">0</span>V</p>
+    <p>Robot Speed: <span id="speed">0</span></p>
+
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('update_data', function(data) {
+            document.getElementById('battery').innerText = data.robot_battery;
+            document.getElementById('speed').innerText = data.robot_speed;
+        });
+
+        setInterval(() => { socket.emit('get_data'); }, 1000);  // Request data every second
+    </script>
+</body>
+</html>
