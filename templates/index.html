@@ -68,32 +68,40 @@ td{
     <table>
         <th></th>
         <tr>
-            <td><button class="level" style="background-color: red; border-color: maroon; box-shadow: 0 8px 0 maroon; filter: drop-shadow(0 15px 20px maroon)">L3</button></td>
-            <td><button class="level" style="background-color: red; border-color: maroon; box-shadow: 0 8px 0 maroon; filter: drop-shadow(0 15px 20px maroon)">R3</button></td>
+            <td><button id="L3" class="level" style="background-color: red; border-color: maroon; box-shadow: 0 8px 0 maroon; filter: drop-shadow(0 15px 20px maroon)">L3</button></td>
+            <td><button id="R3" class="level" style="background-color: red; border-color: maroon; box-shadow: 0 8px 0 maroon; filter: drop-shadow(0 15px 20px maroon)">R3</button></td>
         </tr>
         <tr>
-            <td><button class="level" style="background-color: orange; border-color: chocolate; box-shadow: 0 8px 0 chocolate; filter: drop-shadow(0 15px 20px chocolate)">L2</button></td>
-            <td><button class="level" style="background-color: orange; border-color: chocolate; box-shadow: 0 8px 0 chocolate; filter: drop-shadow(0 15px 20px chocolate)">R2</button></td>
+            <td><button id="L2" class="level" style="background-color: orange; border-color: chocolate; box-shadow: 0 8px 0 chocolate; filter: drop-shadow(0 15px 20px chocolate)">L2</button></td>
+            <td><button id="R2" class="level" style="background-color: orange; border-color: chocolate; box-shadow: 0 8px 0 chocolate; filter: drop-shadow(0 15px 20px chocolate)">R2</button></td>
         </tr>
         <tr>
-            <td><button class="level" style="background-color: green; border-color: darkgreen; box-shadow: 0 8px 0 darkgreen; filter: drop-shadow(0 15px 20px darkgreen)">L1</button></td>
-            <td><button class="level" style="background-color: green; border-color: darkgreen; box-shadow: 0 8px 0 darkgreen; filter: drop-shadow(0 15px 20px darkgreen)">R1</button></td>
+            <td><button id="L1" class="level" style="background-color: green; border-color: darkgreen; box-shadow: 0 8px 0 darkgreen; filter: drop-shadow(0 15px 20px darkgreen)">L1</button></td>
+            <td><button id="R1" class="level" style="background-color: green; border-color: darkgreen; box-shadow: 0 8px 0 darkgreen; filter: drop-shadow(0 15px 20px darkgreen)">R1</button></td>
         </tr>
         <tr>
-            <td><button class="levels">L0</button></td>
-            <td><button class="levels">R0</button></td>
+            <td><button id="L0" class="level">L0</button></td>
+            <td><button id="R0" class="level">R0</button></td>
         </tr>
     </table>
 
 
     <script>
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        socket.on('update_data', function(data) {
-            document.getElementById('battery').innerText = data.robot_battery;
-            document.getElementById('speed').innerText = data.robot_speed;
+        function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+        var buttons = document.querySelectorAll('.level');
+        buttons.forEach(function(button){
+            button.addEventListener('click', function(){
+                var level = this.id;
+                var response = httpGet('http://localhost:8008/level?cumber=' + level);
+                console.log(response);
+            });
         });
-
-        setInterval(() => { socket.emit('get_data'); }, 1000);  // Request data every second
     </script>
 </body>
 </html>

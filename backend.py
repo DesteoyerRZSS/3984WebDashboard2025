@@ -13,11 +13,12 @@ sd = NetworkTables.getTable('ButtonBoard')
 def home():
     return render_template('index.html')
 
-@app.route('/update_table', methods=['GET'])
+@app.route('/level', methods=['GET'])
 def update_table():
     param1 = request.args.get('cumber')
     sd.putString('cumber', param1)
-    return render_template('index.html', dataToRender=param1)
+    print(param1)
+    return "recieved " + param1
 
 if __name__ == '__main__':
     socketio.run(app, debug=False, use_reloader=False, host='0.0.0.0', port='8008')
