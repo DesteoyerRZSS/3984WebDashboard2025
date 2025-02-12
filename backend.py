@@ -1,8 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 from threading import Thread
-from flask_socketio import SocketIO, emit
-from fileinput import filename 
-from flask import send_from_directory
+from flask_socketio import SocketIO
 from networktables import NetworkTables
 
 NetworkTables.initialize(server='roborio-3984-frc.local') 
