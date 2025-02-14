@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from threading import Thread
 from flask_socketio import SocketIO
 from networktables import NetworkTables
 
