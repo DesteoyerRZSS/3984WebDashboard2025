@@ -37,9 +37,9 @@ body{
   
 }
 
-.levels{
+/* .levels{
     padding-bottom: 0;
-}
+} */
 
 .level:active {
   letter-spacing: 0px;
@@ -60,6 +60,9 @@ td{
     
 }
 
+#0{
+    width: 100%;
+}
     </style>
 </head>
 <body>
@@ -79,10 +82,12 @@ td{
             <td><button id="R1" class="level" style="background-color: green; border-color: darkgreen; box-shadow: 0 8px 0 darkgreen; filter: drop-shadow(0 15px 20px darkgreen)">R1</button></td>
         </tr>
         <tr>
-            <td><button id="L0" class="level">L0</button></td>
-            <td><button id="R0" class="level">R0</button></td>
+            <td colspan="2"><button id="0" class="level">0</button></td>
         </tr>
+            
+        
     </table>
+    
 
 
     <script>
