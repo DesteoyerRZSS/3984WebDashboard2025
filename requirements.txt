@@ -1,4 +1,6 @@
 flask
-threading
+#threading
 flask_socketio
 pynetworktables
+eventlet
+gevent
