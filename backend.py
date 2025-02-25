@@ -2,9 +2,7 @@ from flask import Flask, render_template_string, request
 from flask_socketio import SocketIO
 from networktables import NetworkTables
 import os
-import gevent
-import eventlet
-import threading
+
 NetworkTables.initialize(server='roborio-3984-frc.local') 
 app = Flask(__name__)
 #socketio = SocketIO(app, async_mode='threading')
@@ -105,21 +103,20 @@ td{
 
 
     <script>
-        function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
+        function httpGet(theUrl){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
         var buttons = document.querySelectorAll('.level');
         buttons.forEach(function(button){
             button.addEventListener('click', function(){
                 var level = this.id;
                 var response = httpGet('http://localhost:8008/level?cumber=' + level);
                 console.log(response);
-            });
         });
+    });
     </script>
 </body>
 </html>
