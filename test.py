@@ -1,6 +1,6 @@
 from PyQt6.QtCore import QUrl
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile
+from PyQt6.QtWebEngineWidgets import QWebEngineView
 import sys
 
 class WebApp(QMainWindow):
