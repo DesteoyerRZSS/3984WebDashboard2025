@@ -123,13 +123,30 @@ td{
     '''
     return render_template_string(template, name='Robot Dashboard')
 
+# @app.route('/level', methods=['GET'])
+# def update_table():
+#     param1 = request.args.get('cumber')
+#     sd.putString('cumber', param1)
+#     print(param1)
+#     return "recieved " + param1
 @app.route('/level', methods=['GET'])
 def update_table():
     param1 = request.args.get('cumber')
-    sd.putString('cumber', param1)
-    print(param1)
-    return "recieved " + param1
 
+    # Check if NetworkTables is connected
+    if not NetworkTables.isConnected():
+        return "Error: RoboRIO not connected", 500
+
+    # Write to NetworkTables
+    sd.putString('cumber', param1)
+
+    # Read back the value to confirm it's set
+    read_value = sd.getString('cumber', 'ERROR')
+    if read_value != param1:
+        return "Error: Value not set correctly", 500
+
+    print(f"Sent to NetworkTables: {param1}")
+    return f"Received {param1}, confirmed by NetworkTables"
 if __name__ == '__main__':
     os.system("start chrome \"http://localhost:8008\"")
     app.run(host='0.0.0.0',port='8008')
