@@ -1,0 +1,41 @@
+{
+  "name": "robot-dashboard-electron",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build":{
+    "appId": "com.3984.dashboard",
+    "productName": "Robot Dashboard",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^23.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
+}
